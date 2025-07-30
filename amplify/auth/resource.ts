@@ -23,13 +23,24 @@ export const auth = defineAuth({
         scopes: ['openid', 'profile', 'email'], // Adjust scopes as needed
         attributeMapping: {
           email: 'email',
-          // username: 'sub',
+          fullname: 'name',
+          preferredUsername: 'preferred_username',
+          givenName: 'given_name',
+          familyName: 'family_name',
+          // 'custom:gtAccountEntitlement': 'gtAccountEntitlement',
+          // 'custom:gtPersonEntitlement': 'gtPersonEntitlement',
+          // 'custom:gtEmplid': 'gtEmplid',
+          // 'custom:group': 'group',
+          // 'custom:upn': 'upn',
+          // 'custom:gtEntitlement': 'gtEntitlement',
         },
       }],
       callbackUrls: [
+        'https://signinwithredirect.d30y0c69e47spg.amplifyapp.com/',
         'http://localhost:5173/',
       ],
       logoutUrls: [
+        'https://signinwithredirect.d30y0c69e47spg.amplifyapp.com/',
         'http://localhost:5173/',
       ],
     },

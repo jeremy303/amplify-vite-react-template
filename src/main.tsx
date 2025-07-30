@@ -10,14 +10,24 @@ import { signInWithRedirect, getCurrentUser, signOut } from "@aws-amplify/auth";
 Amplify.configure(outputs);
 
 function Root() {
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<unknown>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getCurrentUser()
-            .then(setUser)
-            .catch(() => setUser(null))
-            .finally(() => setLoading(false));
+        const fetchUser = async () => {
+            console.log("Getting current user...");
+            try {
+                const currentUser = await getCurrentUser();
+                console.log('current user', currentUser);
+                setUser(currentUser);
+            } catch (error) {
+                console.error('Error fetching user:', error);
+                setUser(null);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchUser();
     }, []);
 
     if (loading) return <div>Loading...</div>;
