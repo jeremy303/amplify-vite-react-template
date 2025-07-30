@@ -12,7 +12,6 @@ function App() {
             next: (data) => setTodos([...data.items]),
         });
     }, []);
-
     function createTodo() {
         client.models.Todo.create({content: window.prompt("Todo content")});
     }
